@@ -6,7 +6,7 @@
 // Copyright (c) Microsoft Open Technologies Inc
 // Licensed under the MIT license.
 // TypeScript Version: 2.3
-type channel = "loadstart" | "loadstop" | "loaderror" | "exit" | "message" | "customscheme";
+type channel = "loadstart" | "loadstop" | "loaderror" | "exit" | "message" | "customscheme" | "closeClick";
 
 /**
  * The object returned from a call to cordova.InAppBrowser.open.

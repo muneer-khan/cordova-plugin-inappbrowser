@@ -1087,8 +1087,20 @@ BOOL isExiting = FALSE;
     return NO;
 }
 
+- (void)closeClick
+{
+    if (self.callbackId != nil) {
+        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+                                                      messageAsDictionary:@{@"type":@"closeClick", @"url":url}];
+        [pluginResult setKeepCallback:[NSNumber numberWithBool:YES]];
+        
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
+    }
+}
+
 - (void)close
 {
+    [self.navigationDelegate closeClick];
     self.currentURL = nil;
     
     __weak UIViewController* weakSelf = self;

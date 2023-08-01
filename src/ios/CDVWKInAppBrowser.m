@@ -1091,7 +1091,7 @@ BOOL isExiting = FALSE;
 {
     if (self.callbackId != nil) {
         CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
-                                                      messageAsDictionary:@{@"type":@"closeClick", @"url":url}];
+                                                      messageAsDictionary:@{@"type":@"message", @"data":"closeClick"}];
         [pluginResult setKeepCallback:[NSNumber numberWithBool:YES]];
         
         [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];

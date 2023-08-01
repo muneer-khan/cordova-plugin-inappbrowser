@@ -75,6 +75,15 @@ static CDVWKInAppBrowser* instance = nil;
         NSLog(@"IAB.close() called but it was already closed.");
         return;
     }
+    if (self.callbackId != nil) {
+        NSLog(@"Sending close button click");
+
+        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+                                                      messageAsDictionary:@{@"type":@"message", @"data":"closeClick"}];
+        [pluginResult setKeepCallback:[NSNumber numberWithBool:YES]];
+        
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
+    }
     
     // Things are cleaned up in browserExit.
     [self.inAppBrowserViewController close];
@@ -1087,20 +1096,8 @@ BOOL isExiting = FALSE;
     return NO;
 }
 
-- (void)closeClick
-{
-    if (self.callbackId != nil) {
-        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
-                                                      messageAsDictionary:@{@"type":@"message", @"data":"closeClick"}];
-        [pluginResult setKeepCallback:[NSNumber numberWithBool:YES]];
-        
-        [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
-    }
-}
-
 - (void)close
-{
-    [self.navigationDelegate closeClick];
+{    
     self.currentURL = nil;
     
     __weak UIViewController* weakSelf = self;

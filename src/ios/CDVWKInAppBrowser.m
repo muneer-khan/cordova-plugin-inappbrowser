@@ -75,6 +75,7 @@ static CDVWKInAppBrowser* instance = nil;
         NSLog(@"IAB.close() called but it was already closed.");
         return;
     }
+    NSLog(@"close click event");
     if (self.callbackId != nil) {
         NSLog(@"Sending close button click");
 
